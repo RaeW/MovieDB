@@ -1,6 +1,5 @@
 package com.dragonflythicket.moviedb.utils;
 
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -41,16 +40,8 @@ public class FetchMoviePosterTask extends AsyncTask<Void, Void, ArrayList<Movie>
         return fetchMoviePosterTask;
     }
 
-    // URL: "http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=" + BuildConfig.MOVIE_DB_API_KEY
-
     @Override
     public ArrayList<Movie> doInBackground(Void ... params) {
-        // here's what I need to do: get a connection to a specific site, from the comment above. It will return a json
-        // string.
-        // I need to capture the json and parse it. From the json, I will extract the movie posters? But, I also need
-        // to be able to click on a poster and get the info about that particular movie. Thus, I need to save the
-        // movie's ID, at least. (Hah, I just looked back at the hints in the instructions -- yes, the ID is apparently
-        // all I need.)
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
@@ -62,7 +53,6 @@ public class FetchMoviePosterTask extends AsyncTask<Void, Void, ArrayList<Movie>
         try {
             final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key="
                     + BuildConfig.MOVIE_DB_API_KEY;
-            //Uri uri = Uri.parse(MOVIE_BASE_URL);
             URL url = new URL(MOVIE_BASE_URL);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");

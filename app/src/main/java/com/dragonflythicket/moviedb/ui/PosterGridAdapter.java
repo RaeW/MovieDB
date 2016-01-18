@@ -1,17 +1,12 @@
 package com.dragonflythicket.moviedb.ui;
 
 import android.app.Activity;
-import android.content.Context;
-import android.media.Image;
-import android.support.v4.app.Fragment;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dragonflythicket.moviedb.Movie.Movie;
@@ -46,7 +41,7 @@ public class PosterGridAdapter extends ArrayAdapter<Movie> {
         } else {
             holder = (AdapterHelper.ViewHolder) convertView.getTag();
         }
-        // TODO : before I can make the Glide call, I need to parse the json to get the image path
+
         String posterPath = movie.posterPath;
         ImageView image = (ImageView) convertView.findViewById(R.id.thumbnail);
         Glide.with(getContext()).load(Constants.BASEURI + Constants.POSTER_SIZE + posterPath).into(holder.moviePoster);

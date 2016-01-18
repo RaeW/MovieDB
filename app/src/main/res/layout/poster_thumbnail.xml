@@ -6,7 +6,6 @@
 
     <ImageView
         android:id="@+id/thumbnail"
-        android:src="@drawable/var_8_0_tmdb_logo_2_bree"
         android:layout_height="wrap_content"
         android:layout_width="100dp">
     </ImageView>

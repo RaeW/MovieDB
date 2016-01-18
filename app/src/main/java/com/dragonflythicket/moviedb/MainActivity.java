@@ -25,9 +25,7 @@ implements PosterGridFragment.OnFragmentInteractionListener {
                     .commit();
             Log.d(TAG, "Loading poster grid fragment");
         }
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

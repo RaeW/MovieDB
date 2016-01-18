@@ -4,14 +4,11 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.dragonflythicket.moviedb.Movie.Movie;
 import com.dragonflythicket.moviedb.R;
 import com.dragonflythicket.moviedb.utils.FetchMoviePosterTask;
@@ -19,7 +16,6 @@ import com.dragonflythicket.moviedb.utils.MoviePosterTaskCallback;
 import com.dragonflythicket.moviedb.utils.MovieDetailCallback;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,9 +55,6 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
                              Bundle savedInstanceState) {
         movies = new ArrayList<Movie>();
         Movie temp = new Movie();
-        temp.posterPath = "/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg";
-        temp.movieId = "1500";
-        movies.add(temp);
         mImageAdapter = new PosterGridAdapter(
                 getActivity(),
                 movies);
@@ -117,7 +110,6 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
 
     private void runFetchMoviePosterTask() {
         FetchMoviePosterTask task = FetchMoviePosterTask.setUpFetchMoviePosterTask(this);
-        //FetchMoviePosterTask task = new FetchMoviePosterTask(this);
         task.execute();
     }
 
@@ -128,17 +120,9 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
 
     public void onMovieDataReceived(ArrayList<Movie> result) {
         if (result != null) {
-            //Movie[] movies = new Movie[result.size()];
-            //result.toArray(movies);
-            //mImageAdapter.clear();
             movies.clear();
             movies.addAll(result);
-            //mImageAdapter.addAll(movies);
             mImageAdapter.notifyDataSetChanged();
-            Log.d(TAG, "in onMovieDataReceived");
-            for (int i = 0; i < result.size(); i++) {
-                Log.d(TAG, result.get(i).movieId);
-            }
         }
     }
 }
