@@ -1,16 +1,31 @@
 package com.dragonflythicket.moviedb;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import com.dragonflythicket.moviedb.ui.PosterGridFragment;
+
+public class MainActivity extends AppCompatActivity
+implements PosterGridFragment.OnFragmentInteractionListener {
+
+    private final String TAG=MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.main, new PosterGridFragment(), PosterGridFragment.class.getSimpleName())
+                    .commit();
+            Log.d(TAG, "Loading poster grid fragment");
+        }
+
     }
 
 
@@ -35,4 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {}
 }

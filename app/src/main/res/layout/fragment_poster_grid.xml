@@ -6,8 +6,7 @@
               android:paddingBottom="@dimen/activity_vertical_margin"
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin"
-              tools:context=".MainActivityFragment">
+              android:paddingTop="@dimen/activity_vertical_margin">
 
     <GridView
         android:id="@+id/posterGrid"
@@ -18,6 +17,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -25,6 +25,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="-35dp"
             android:src="@drawable/var_8_0_tmdb_logo_2_bree"/>
 
         <TextView
@@ -32,7 +34,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="bottom"
-            android:paddingBottom="13dp"
             android:text="@string/api_attrib"
             android:textAppearance="?android:attr/textAppearanceSmall"/>
     </LinearLayout>
