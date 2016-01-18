@@ -102,6 +102,11 @@ public class FetchMoviePosterTask extends AsyncTask<Void, Void, ArrayList<Movie>
         final String TMDB_RESULTS = "results";
         final String TMDB_POSTER_PATH = "poster_path";
         final String TMDB_ID = "id";
+        final String TMDB_MOVIE_DETAIL = "overview";
+        final String TMDB_RELEASE_DATE = "release_date";
+        final String TMDB_AVERAGE_RATING = "vote_average";
+        final String TMDB_TITLE = "title";
+
 
         JSONObject moviesJson = new JSONObject(movieJsonStr);
         JSONArray movieArray = moviesJson.getJSONArray(TMDB_RESULTS);
@@ -110,8 +115,11 @@ public class FetchMoviePosterTask extends AsyncTask<Void, Void, ArrayList<Movie>
             Movie m = new Movie();
             JSONObject movieDetail = movieArray.getJSONObject(i);
             m.posterPath = movieDetail.getString(TMDB_POSTER_PATH);
-            m.movieId = movieDetail.getString(TMDB_ID);
-            Log.d(TAG, m.posterPath + " " + m.movieId);
+            m.movieId = movieDetail.getInt(TMDB_ID);
+            m.overview = movieDetail.getString(TMDB_MOVIE_DETAIL);
+            m.title = movieDetail.getString(TMDB_TITLE);
+            m.averageRating = movieDetail.getDouble(TMDB_AVERAGE_RATING);
+            m.releaseDate = movieDetail.getString(TMDB_RELEASE_DATE);
             movies.add(m);
         }
         return movies;
