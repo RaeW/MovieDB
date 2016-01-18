@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.dragonflythicket.moviedb.Movie.Movie;
 import com.dragonflythicket.moviedb.R;
 import com.dragonflythicket.moviedb.utils.AdapterHelper;
+import com.dragonflythicket.moviedb.utils.Constants;
 import com.dragonflythicket.moviedb.utils.MovieDetailCallback;
 
 import java.util.List;
@@ -46,11 +47,9 @@ public class PosterGridAdapter extends ArrayAdapter<Movie> {
             holder = (AdapterHelper.ViewHolder) convertView.getTag();
         }
         // TODO : before I can make the Glide call, I need to parse the json to get the image path
-        String baseUri = "http://image.tmdb.org/t/p/";
-        String size = "w185";
         String posterPath = movie.posterPath;
         ImageView image = (ImageView) convertView.findViewById(R.id.thumbnail);
-        Glide.with(getContext()).load(baseUri + size + posterPath).into(holder.moviePoster);
+        Glide.with(getContext()).load(Constants.BASEURI + Constants.POSTER_SIZE + posterPath).into(holder.moviePoster);
         Log.d(TAG, posterPath);
         return convertView;
     }

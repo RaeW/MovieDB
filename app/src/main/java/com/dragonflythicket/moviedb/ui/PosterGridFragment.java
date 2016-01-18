@@ -31,6 +31,7 @@ import java.util.Arrays;
  */
 public class PosterGridFragment extends Fragment implements MovieDetailCallback, MoviePosterTaskCallback {
     private static final String TAG = PosterGridFragment.class.getSimpleName();
+    private ArrayList<Movie> movies;
 
     private PosterGridAdapter mImageAdapter;
 
@@ -56,20 +57,21 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        movies = new ArrayList<Movie>();
         Movie temp = new Movie();
         temp.posterPath = "/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg";
         temp.movieId = "1500";
-        Movie[] movies = {temp};
+        movies.add(temp);
         mImageAdapter = new PosterGridAdapter(
                 getActivity(),
-                Arrays.asList(movies));
+                movies);
 
         View rootView = inflater.inflate(R.layout.fragment_poster_grid, container, false);
 
         GridView posterView = (GridView) rootView.findViewById(R.id.posterGrid);
         posterView.setAdapter(mImageAdapter);
 
-        //runFetchMoviePosterTask();
+        runFetchMoviePosterTask();
 
         return rootView;
     }
@@ -126,8 +128,12 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
 
     public void onMovieDataReceived(ArrayList<Movie> result) {
         if (result != null) {
-            mImageAdapter.clear();
-            mImageAdapter.addAll(result);
+            //Movie[] movies = new Movie[result.size()];
+            //result.toArray(movies);
+            //mImageAdapter.clear();
+            movies.clear();
+            movies.addAll(result);
+            //mImageAdapter.addAll(movies);
             mImageAdapter.notifyDataSetChanged();
             Log.d(TAG, "in onMovieDataReceived");
             for (int i = 0; i < result.size(); i++) {
