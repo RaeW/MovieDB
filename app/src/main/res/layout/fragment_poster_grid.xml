@@ -30,7 +30,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="-35dp"
+            android:layout_marginBottom="-15dp"
             android:src="@drawable/var_8_0_tmdb_logo_2_bree"/>
 
         <TextView

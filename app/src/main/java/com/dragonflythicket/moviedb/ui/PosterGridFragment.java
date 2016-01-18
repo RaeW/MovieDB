@@ -104,7 +104,6 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
 
