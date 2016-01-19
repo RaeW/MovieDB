@@ -2,4 +2,8 @@
     <string name="app_name">Movie DB</string>
     <string name="action_settings">Settings</string>
     <string name="api_attrib">"This product uses the TMDb API but is not endorsed or certified by TMDb."</string>
+
+    <!-- Detail screen strings -->
+    <string name="release_date">Release Date:</string>
+    <string name="average_rating">Average Rating:</string>
 </resources>

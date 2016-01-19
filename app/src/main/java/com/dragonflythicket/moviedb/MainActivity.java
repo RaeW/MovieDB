@@ -20,10 +20,9 @@ implements PosterGridFragment.OnFragmentInteractionListener {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.main, new PosterGridFragment(), PosterGridFragment.class.getSimpleName())
                     .commit();
-            Log.d(TAG, "Loading poster grid fragment");
         }
     }
 

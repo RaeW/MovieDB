@@ -4,12 +4,20 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.dragonflythicket.moviedb.Movie.Movie;
 import com.dragonflythicket.moviedb.R;
+import com.dragonflythicket.moviedb.utils.Constants;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,12 +30,10 @@ import com.dragonflythicket.moviedb.R;
 public class DetailFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String MOVIE_PARAM = "movie";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Movie mMovie;
 
     private OnFragmentInteractionListener mListener;
 
@@ -35,16 +41,14 @@ public class DetailFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param movie Parameter 1.
      * @return A new instance of fragment DetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DetailFragment newInstance(String param1, String param2) {
+    public static DetailFragment newInstance(Movie movie) {
         DetailFragment fragment = new DetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putParcelable(MOVIE_PARAM, movie);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,17 +61,34 @@ public class DetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mMovie = getArguments().getParcelable(MOVIE_PARAM);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
+        // unpack movie
+        Movie movie = mMovie;
 
-        return textView;
+        View rootView = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        ImageView poster = (ImageView) rootView.findViewById(R.id.poster);
+        TextView title = (TextView) rootView.findViewById(R.id.title);
+        TextView releaseDate = (TextView) rootView.findViewById(R.id.release_date);
+        TextView averageRating = (TextView) rootView.findViewById(R.id.average_rating);
+        TextView description = (TextView) rootView.findViewById(R.id.description);
+        String path = Constants.BASEURI + Constants.POSTER_SIZE + movie.posterPath;
+        String date = getString(R.string.release_date) + " "  + movie.releaseDate;
+        String rating = getString(R.string.average_rating) + " " + movie.averageRating;
+
+        //Glide.with(getContext()).load(Constants.BASEURI + Constants.POSTER_SIZE + posterPath).into(holder.moviePoster);
+        Glide.with(rootView.getContext()).load(path).into(poster);
+        title.setText(movie.title);
+        releaseDate.setText(date);
+        averageRating.setText(rating);
+        description.setText(movie.overview);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -77,22 +98,22 @@ public class DetailFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//        try {
+//            mListener = (OnFragmentInteractionListener) activity;
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(activity.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
+//
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        mListener = null;
+//    }
 
     /**
      * This interface must be implemented by activities that contain this

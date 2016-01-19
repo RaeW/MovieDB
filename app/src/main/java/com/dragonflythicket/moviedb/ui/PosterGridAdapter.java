@@ -26,14 +26,15 @@ public class PosterGridAdapter extends ArrayAdapter<Movie> {
 
     private MovieDetailCallback callback;
 
-    public PosterGridAdapter(Activity context, List<Movie> movies) {
+    public PosterGridAdapter(Activity context, List<Movie> movies, MovieDetailCallback callback) {
         super(context, 0, movies);
+        this.callback = callback;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         AdapterHelper.ViewHolder holder;
-        Movie movie = getItem(position);
+        final Movie movie = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext())
                     .inflate(R.layout.poster_thumbnail, parent, false);
@@ -45,7 +46,12 @@ public class PosterGridAdapter extends ArrayAdapter<Movie> {
         String posterPath = movie.posterPath;
         ImageView image = (ImageView) convertView.findViewById(R.id.thumbnail);
         Glide.with(getContext()).load(Constants.BASEURI + Constants.POSTER_SIZE + posterPath).into(holder.moviePoster);
-        Log.d(TAG, posterPath);
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v) {
+                callback.posterClicked(movie);
+            }
+        });
         return convertView;
     }
 

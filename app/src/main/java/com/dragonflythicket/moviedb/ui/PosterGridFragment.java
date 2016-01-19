@@ -3,7 +3,9 @@ package com.dragonflythicket.moviedb.ui;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +59,8 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
         Movie temp = new Movie();
         mImageAdapter = new PosterGridAdapter(
                 getActivity(),
-                movies);
+                movies,
+                this);
 
         View rootView = inflater.inflate(R.layout.fragment_poster_grid, container, false);
 
@@ -113,8 +116,13 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
     }
 
     @Override
-    public void posterClicked(String clipId) {
-
+    public void posterClicked(Movie movie) {
+        DetailFragment fragment = DetailFragment.newInstance(movie);
+        FragmentManager fragmentManager = getActivity().getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main, fragment);
+        fragmentTransaction.addToBackStack(DetailFragment.class.getSimpleName());
+        fragmentTransaction.commit();
     }
 
     public void onMovieDataReceived(ArrayList<Movie> result) {
