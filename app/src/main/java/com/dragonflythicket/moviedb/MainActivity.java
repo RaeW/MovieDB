@@ -1,16 +1,19 @@
 package com.dragonflythicket.moviedb;
 
-import android.net.Uri;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dragonflythicket.moviedb.Movie.Movie;
+import com.dragonflythicket.moviedb.ui.DetailFragment;
 import com.dragonflythicket.moviedb.ui.PosterGridFragment;
 
 public class MainActivity extends AppCompatActivity
-implements PosterGridFragment.OnFragmentInteractionListener {
+implements PosterGridFragment.OnFragmentInteractionListener, FragmentManager.OnBackStackChangedListener {
 
     private final String TAG=MainActivity.class.getSimpleName();
 
@@ -18,6 +21,8 @@ implements PosterGridFragment.OnFragmentInteractionListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getFragmentManager().addOnBackStackChangedListener(this);
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -49,5 +54,40 @@ implements PosterGridFragment.OnFragmentInteractionListener {
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {}
+    public void onFragmentInteraction(Movie movie) {
+        DetailFragment fragment = DetailFragment.newInstance(movie);
+        replaceFragment(fragment);
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        String backStateName = fragment.getClass().getSimpleName();
+        FragmentManager manager = getFragmentManager();
+        boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
+
+        if (!fragmentPopped) {
+            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+            fragmentTransaction.replace(R.id.main, fragment);
+            fragmentTransaction.addToBackStack(backStateName);
+            fragmentTransaction.commit();
+        }
+    }
+
+    @Override
+    public void onBackStackChanged() {
+//        boolean canBack = getFragmentManager().getBackStackEntryCount() > 0;
+//        if (getActionBar() != null) {
+//            getActionBar().setDisplayHomeAsUpEnabled(canBack);
+//        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //if (getFragmentManager().findFragmentByTag(DetailFragment.class.getSimpleName())!= null) {
+         //   getFragmentManager().popBackStack(PosterGridFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

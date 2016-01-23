@@ -73,9 +73,9 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onDetailPressed(Movie movie) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteraction(movie);
         }
     }
 
@@ -107,7 +107,7 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
+        public void onFragmentInteraction(Movie movie);
     }
 
     private void runFetchMoviePosterTask() {
@@ -117,12 +117,7 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
 
     @Override
     public void posterClicked(Movie movie) {
-        DetailFragment fragment = DetailFragment.newInstance(movie);
-        FragmentManager fragmentManager = getActivity().getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.main, fragment);
-        fragmentTransaction.addToBackStack(DetailFragment.class.getSimpleName());
-        fragmentTransaction.commit();
+        onDetailPressed(movie);
     }
 
     public void onMovieDataReceived(ArrayList<Movie> result) {
