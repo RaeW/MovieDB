@@ -13,7 +13,7 @@ import com.dragonflythicket.moviedb.ui.DetailFragment;
 import com.dragonflythicket.moviedb.ui.PosterGridFragment;
 
 public class MainActivity extends AppCompatActivity
-implements PosterGridFragment.OnFragmentInteractionListener, FragmentManager.OnBackStackChangedListener {
+implements PosterGridFragment.OnFragmentInteractionListener {
 
     private final String TAG=MainActivity.class.getSimpleName();
 
@@ -21,8 +21,6 @@ implements PosterGridFragment.OnFragmentInteractionListener, FragmentManager.OnB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getFragmentManager().addOnBackStackChangedListener(this);
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -71,19 +69,10 @@ implements PosterGridFragment.OnFragmentInteractionListener, FragmentManager.OnB
             fragmentTransaction.commit();
         }
     }
-
-    @Override
-    public void onBackStackChanged() {
-//        boolean canBack = getFragmentManager().getBackStackEntryCount() > 0;
-//        if (getActionBar() != null) {
-//            getActionBar().setDisplayHomeAsUpEnabled(canBack);
-//        }
-    }
-
+    
     @Override
     public void onBackPressed() {
-        //if (getFragmentManager().findFragmentByTag(DetailFragment.class.getSimpleName())!= null) {
-         //   getFragmentManager().popBackStack(PosterGridFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        // this was the magic formula to return to post grid rather than the device's home screen
         if (getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
         } else {
