@@ -1,11 +1,8 @@
 package com.dragonflythicket.moviedb.ui;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,13 +53,12 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         movies = new ArrayList<Movie>();
-        Movie temp = new Movie();
         mImageAdapter = new PosterGridAdapter(
                 getActivity(),
                 movies,
                 this);
 
-        View rootView = inflater.inflate(R.layout.fragment_poster_grid, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_poster_grid, container, false);
 
         GridView posterView = (GridView) rootView.findViewById(R.id.posterGrid);
         posterView.setAdapter(mImageAdapter);

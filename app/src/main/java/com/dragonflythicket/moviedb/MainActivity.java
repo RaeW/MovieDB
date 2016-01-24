@@ -69,7 +69,7 @@ implements PosterGridFragment.OnFragmentInteractionListener {
             fragmentTransaction.commit();
         }
     }
-    
+
     @Override
     public void onBackPressed() {
         // this was the magic formula to return to post grid rather than the device's home screen
@@ -79,4 +79,6 @@ implements PosterGridFragment.OnFragmentInteractionListener {
             super.onBackPressed();
         }
     }
+
+
 }
