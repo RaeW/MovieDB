@@ -54,6 +54,7 @@ implements PosterGridFragment.OnFragmentInteractionListener {
     @Override
     public void onFragmentInteraction(Movie movie) {
         DetailFragment fragment = DetailFragment.newInstance(movie);
+
         replaceFragment(fragment);
     }
 
@@ -64,7 +65,10 @@ implements PosterGridFragment.OnFragmentInteractionListener {
 
         if (!fragmentPopped) {
             FragmentTransaction fragmentTransaction = manager.beginTransaction();
-            fragmentTransaction.replace(R.id.main, fragment);
+            Fragment current = manager.findFragmentByTag(PosterGridFragment.class.getSimpleName());
+            fragmentTransaction.add(R.id.main, fragment);
+            fragmentTransaction.hide(current);
+            //fragmentTransaction.replace(R.id.main, fragment);
             fragmentTransaction.addToBackStack(backStateName);
             fragmentTransaction.commit();
         }
