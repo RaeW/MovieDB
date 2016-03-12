@@ -5,12 +5,14 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dragonflythicket.moviedb.Movie.Movie;
 import com.dragonflythicket.moviedb.ui.DetailFragment;
 import com.dragonflythicket.moviedb.ui.PosterGridFragment;
+import com.dragonflythicket.moviedb.ui.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
 implements PosterGridFragment.OnFragmentInteractionListener {
@@ -45,6 +47,8 @@ implements PosterGridFragment.OnFragmentInteractionListener {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            SettingsFragment fragment = SettingsFragment.newInstance();
+            replaceFragment(fragment);
             return true;
         }
 
@@ -54,7 +58,6 @@ implements PosterGridFragment.OnFragmentInteractionListener {
     @Override
     public void onFragmentInteraction(Movie movie) {
         DetailFragment fragment = DetailFragment.newInstance(movie);
-
         replaceFragment(fragment);
     }
 
@@ -66,9 +69,7 @@ implements PosterGridFragment.OnFragmentInteractionListener {
         if (!fragmentPopped) {
             FragmentTransaction fragmentTransaction = manager.beginTransaction();
             Fragment current = manager.findFragmentByTag(PosterGridFragment.class.getSimpleName());
-            fragmentTransaction.add(R.id.main, fragment);
-            fragmentTransaction.hide(current);
-            //fragmentTransaction.replace(R.id.main, fragment);
+            fragmentTransaction.replace(R.id.main, fragment, PosterGridFragment.class.getSimpleName());
             fragmentTransaction.addToBackStack(backStateName);
             fragmentTransaction.commit();
         }
@@ -83,6 +84,4 @@ implements PosterGridFragment.OnFragmentInteractionListener {
             super.onBackPressed();
         }
     }
-
-
 }

@@ -1,0 +1,140 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 1048576 bytes for AllocateHeap
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (memory/allocation.inline.hpp:61), pid=7032, tid=15516
+#
+# JRE version:  (7.0_79-b15) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (24.79-b02 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000002b3d800):  JavaThread "Unknown thread" [_thread_in_vm, id=15516, stack(0x0000000002970000,0x0000000002a70000)]
+
+Stack: [0x0000000002970000,0x0000000002a70000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x0000000002b3d800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=15516, stack(0x0000000002970000,0x0000000002a70000)]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ PSYoungGen      total 76288K, used 1310K [0x00000000eaa80000, 0x00000000eff80000, 0x0000000100000000)
+  eden space 65536K, 2% used [0x00000000eaa80000,0x00000000eabc7b38,0x00000000eea80000)
+  from space 10752K, 0% used [0x00000000ef500000,0x00000000ef500000,0x00000000eff80000)
+  to   space 10752K, 0% used [0x00000000eea80000,0x00000000eea80000,0x00000000ef500000)
+ ParOldGen       total 173568K, used 0K [0x00000000c0000000, 0x00000000ca980000, 0x00000000eaa80000)
+  object space 173568K, 0% used [0x00000000c0000000,0x00000000c0000000,0x00000000ca980000)
+ PSPermGen       total 21504K, used 697K [0x00000000bae00000, 0x00000000bc300000, 0x00000000c0000000)
+  object space 21504K, 3% used [0x00000000bae00000,0x00000000baeae588,0x00000000bc300000)
+
+Card table byte_map: [0x0000000005c40000,0x0000000005e70000] byte_map_base: 0x0000000005669000
+
+Polling page: 0x0000000002870000
+
+Code Cache  [0x0000000002c40000, 0x0000000002eb0000, 0x0000000005c40000)
+ total_blobs=38 nmethods=0 adapters=20 free_code_cache=48889Kb largest_free_block=50062528
+
+Compilation events (0 events):
+No events
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.018 loading class 0x0000000002b903a0
+Event: 0.018 loading class 0x0000000002b903a0 done
+Event: 0.018 loading class 0x0000000002b903f0
+Event: 0.018 loading class 0x0000000002b903f0 done
+Event: 0.018 loading class 0x0000000002b90440
+Event: 0.018 loading class 0x0000000002b90440 done
+Event: 0.019 loading class 0x0000000002b911c0
+Event: 0.019 loading class 0x0000000002b911c0 done
+Event: 0.019 loading class 0x0000000002b90de0
+Event: 0.019 loading class 0x0000000002b90de0 done
+
+
+Dynamic libraries:
+0x00007ff7920b0000 - 0x00007ff7920e3000 	C:\Program Files\Java\jdk1.7.0_79\bin\java.exe
+0x00007ffb4d930000 - 0x00007ffb4daf2000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffb4b5d0000 - 0x00007ffb4b67d000 	C:\WINDOWS\system32\KERNEL32.DLL
+0x00007ffb4a4a0000 - 0x00007ffb4a67d000 	C:\WINDOWS\system32\KERNELBASE.dll
+0x00007ffb4d270000 - 0x00007ffb4d316000 	C:\WINDOWS\system32\ADVAPI32.dll
+0x00007ffb4b2b0000 - 0x00007ffb4b34d000 	C:\WINDOWS\system32\msvcrt.dll
+0x00007ffb4b350000 - 0x00007ffb4b3ab000 	C:\WINDOWS\system32\sechost.dll
+0x00007ffb4cf60000 - 0x00007ffb4d086000 	C:\WINDOWS\system32\RPCRT4.dll
+0x00007ffb4d700000 - 0x00007ffb4d84e000 	C:\WINDOWS\system32\USER32.dll
+0x00007ffb4b720000 - 0x00007ffb4b8a6000 	C:\WINDOWS\system32\GDI32.dll
+0x00007ffb41ff0000 - 0x00007ffb42264000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.10240.16384_none_f41f7b285750ef43\COMCTL32.dll
+0x00007ffb4b680000 - 0x00007ffb4b6b6000 	C:\WINDOWS\system32\IMM32.DLL
+0x00007ffb4cde0000 - 0x00007ffb4cf3c000 	C:\WINDOWS\system32\MSCTF.dll
+0x0000000064dc0000 - 0x0000000064e92000 	C:\Program Files\Java\jdk1.7.0_79\jre\bin\msvcr100.dll
+0x00000000651f0000 - 0x00000000659c5000 	C:\Program Files\Java\jdk1.7.0_79\jre\bin\server\jvm.dll
+0x00007ffb4d870000 - 0x00007ffb4d878000 	C:\WINDOWS\system32\PSAPI.DLL
+0x00007ffb3dbd0000 - 0x00007ffb3dbd9000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffb47cc0000 - 0x00007ffb47ce3000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffb4b120000 - 0x00007ffb4b189000 	C:\WINDOWS\system32\WS2_32.dll
+0x00007ffb47a10000 - 0x00007ffb47a3c000 	C:\WINDOWS\SYSTEM32\WINMMBASE.dll
+0x00007ffb4d090000 - 0x00007ffb4d098000 	C:\WINDOWS\system32\NSI.dll
+0x00007ffb4af30000 - 0x00007ffb4af74000 	C:\WINDOWS\system32\cfgmgr32.dll
+0x00007ffb48cb0000 - 0x00007ffb48cd7000 	C:\WINDOWS\SYSTEM32\DEVOBJ.dll
+0x0000000065cd0000 - 0x0000000065cdf000 	C:\Program Files\Java\jdk1.7.0_79\jre\bin\verify.dll
+0x00000000651c0000 - 0x00000000651e8000 	C:\Program Files\Java\jdk1.7.0_79\jre\bin\java.dll
+0x00000000651a0000 - 0x00000000651b5000 	C:\Program Files\Java\jdk1.7.0_79\jre\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Xmx1024M -Dfile.encoding=windows-1252 -Duser.country=US -Duser.language=en -Duser.variant 
+java_command: com.android.dx.command.Main --dex --num-threads=4 --output D:\Media\Documents\Programming Projects\MovieDB\app\build\intermediates\pre-dexed\debug\internal_impl-23.2.0-fb08f34068c5c16e006766d73e4328b5520927f4.jar D:\Media\Documents\Programming Projects\MovieDB\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.0\jars\libs\internal_impl-23.2.0.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Program Files\Broadcom\Broadcom 802.11 Network Adapter\Driver;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\WIDCOMM\Bluetooth Software\;C:\Program Files\WIDCOMM\Bluetooth Software\syswow64;C:\Program Files (x86)\Common Files\Acronis\SnapAPI\;C:\Program Files (x86)\Calibre2\;C:\Anaconda;C:\Anaconda\Scripts;C:\Program Files\Sublime Text 3;C:\Program Files\Java\jdk1.7.0_79\bin;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files (x86)\nodejs\;C:\Users\Rae\AppData\Local\Android\sdk\platform-tools;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\hdparm;D:\Development\SQLite;C:\RailsInstaller\Ruby2.1.0\bin;C:\Users\Rae\AppData\Roaming\npm;C:\Program Files\smartmontools\bin
+USERNAME=Rae
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 60 Stepping 3, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 8.1 , 64 bit Build 9600 
+
+CPU:total 8 (4 cores per cpu, 2 threads per core) family 6 model 60 stepping 3, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, erms, ht, tsc, tscinvbit
+
+Memory: 4k page, physical 16690008k(5149676k free), swap 16690008k(11044k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (24.79-b02) for windows-amd64 JRE (1.7.0_79-b15), built on Apr 10 2015 12:36:16 by "java_re" with unknown MS VC++:1600
+
+time: Sat Mar 12 12:16:23 2016
+elapsed time: 0 seconds
+

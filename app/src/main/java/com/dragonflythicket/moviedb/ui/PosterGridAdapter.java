@@ -1,6 +1,7 @@
 package com.dragonflythicket.moviedb.ui;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,13 @@ public class PosterGridAdapter extends ArrayAdapter<Movie> {
 
         String posterPath = movie.posterPath;
         ImageView image = (ImageView) convertView.findViewById(R.id.thumbnail);
-        Glide.with(getContext()).load(Constants.BASEURI + Constants.POSTER_SIZE + posterPath).into(holder.moviePoster);
+        if (posterPath.equals("null") || posterPath.equals("") || posterPath== null) {
+            movie.posterPath = "";
+            holder.moviePoster.setImageResource(R.drawable.background);
+        }
+        else {
+            Glide.with(getContext()).load(Constants.BASEURI + Constants.POSTER_SIZE + posterPath).into(holder.moviePoster);
+        }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
         public void onClick(View v) {

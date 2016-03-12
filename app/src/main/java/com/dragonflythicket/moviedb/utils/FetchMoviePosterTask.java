@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class FetchMoviePosterTask extends AsyncTask<Void, Void, ArrayList<Movie>> {
     static final String TAG=FetchMoviePosterTask.class.getSimpleName();
     private MoviePosterTaskCallback callback;
+    private String mSortBy;
 
     public FetchMoviePosterTask(MoviePosterTaskCallback callback) {
         super();
@@ -34,9 +35,10 @@ public class FetchMoviePosterTask extends AsyncTask<Void, Void, ArrayList<Movie>
 
     }
 
-    public static FetchMoviePosterTask setUpFetchMoviePosterTask(MoviePosterTaskCallback callback) {
+    public static FetchMoviePosterTask setUpFetchMoviePosterTask(MoviePosterTaskCallback callback, String sortBy) {
         FetchMoviePosterTask fetchMoviePosterTask = new FetchMoviePosterTask();
         fetchMoviePosterTask.callback = callback;
+        fetchMoviePosterTask.mSortBy = sortBy;
         return fetchMoviePosterTask;
     }
 
@@ -51,9 +53,11 @@ public class FetchMoviePosterTask extends AsyncTask<Void, Void, ArrayList<Movie>
         ArrayList<Movie> movies = null;
 
         try {
-            final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key="
-                    + BuildConfig.MOVIE_DB_API_KEY;
-            URL url = new URL(MOVIE_BASE_URL);
+            final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/discover/movie?sort_by=";
+            final String QUERY_PARAM=mSortBy;
+            final String API_KEY = "&api_key=" + BuildConfig.MOVIE_DB_API_KEY;
+            Log.d(TAG, MOVIE_BASE_URL+QUERY_PARAM+API_KEY);
+            URL url = new URL(MOVIE_BASE_URL+QUERY_PARAM+API_KEY);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
