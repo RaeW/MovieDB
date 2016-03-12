@@ -53,9 +53,9 @@ public class FetchMoviePosterTask extends AsyncTask<Void, Void, ArrayList<Movie>
         ArrayList<Movie> movies = null;
 
         try {
-            final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/discover/movie?sort_by=";
+            final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/";
             final String QUERY_PARAM=mSortBy;
-            final String API_KEY = "&api_key=" + BuildConfig.MOVIE_DB_API_KEY;
+            final String API_KEY = "?api_key=" + BuildConfig.MOVIE_DB_API_KEY;
             Log.d(TAG, MOVIE_BASE_URL+QUERY_PARAM+API_KEY);
             URL url = new URL(MOVIE_BASE_URL+QUERY_PARAM+API_KEY);
             urlConnection = (HttpURLConnection) url.openConnection();

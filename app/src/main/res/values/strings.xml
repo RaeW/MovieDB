@@ -14,8 +14,8 @@
     <string name="sort_popular">Popularity</string>
     <string name="sort_date">Release Date</string>
     <string name="highest_rated">Highest Rated</string>
-    <string name="highest_rated_param">vote_average.desc</string>
+    <string name="highest_rated_param">top_rated</string>
     <string name="release_date_param">primary_release_date.desc</string>
-    <string name="most_popular_param">popularity.desc</string>
+    <string name="most_popular_param">popular</string>
 
 </resources>
