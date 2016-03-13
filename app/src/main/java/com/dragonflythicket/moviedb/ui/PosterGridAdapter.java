@@ -25,11 +25,8 @@ import java.util.List;
 public class PosterGridAdapter extends ArrayAdapter<Movie> {
     private final String TAG = PosterGridAdapter.class.getSimpleName();
 
-    private MovieDetailCallback callback;
-
-    public PosterGridAdapter(Activity context, List<Movie> movies, MovieDetailCallback callback) {
+    public PosterGridAdapter(Activity context, List<Movie> movies) {
         super(context, 0, movies);
-        this.callback = callback;
     }
 
     @Override
@@ -53,12 +50,12 @@ public class PosterGridAdapter extends ArrayAdapter<Movie> {
         else {
             Glide.with(getContext()).load(Constants.BASEURI + Constants.POSTER_SIZE + posterPath).into(holder.moviePoster);
         }
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-        public void onClick(View v) {
-                callback.posterClicked(movie);
-            }
-        });
+//        convertView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//        public void onClick(View v) {
+//                callback.posterClicked(movie);
+//            }
+//        });
         return convertView;
     }
 

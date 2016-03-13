@@ -1,8 +1,5 @@
 package com.dragonflythicket.moviedb.ui;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Loader;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -12,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.dragonflythicket.moviedb.Movie.Movie;
@@ -30,13 +28,13 @@ import java.util.ArrayList;
  * Use the {@link PosterGridFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PosterGridFragment extends Fragment implements MovieDetailCallback, MoviePosterTaskCallback {
+public class PosterGridFragment extends Fragment implements MoviePosterTaskCallback {
     private static final String TAG = PosterGridFragment.class.getSimpleName();
     private ArrayList<Movie> movies;
 
     private PosterGridAdapter mImageAdapter;
     private GridView mPosterView;
-    private Parcelable mGridState;
+//    private Parcelable mGridState;
 
     private OnFragmentInteractionListener mListener;
 
@@ -44,8 +42,7 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
      * @return A new instance of fragment PosterGridFragment.
      */
     public static PosterGridFragment newInstance() {
-        PosterGridFragment fragment = new PosterGridFragment();
-        return fragment;
+        return new PosterGridFragment();
     }
 
     public PosterGridFragment() {
@@ -55,27 +52,43 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
+//        setRetainInstance(true);
         Log.d(TAG, "onCreate");
+        if (savedInstanceState == null || !savedInstanceState.containsKey("movies")) {
+            movies = new ArrayList<Movie>();
+        }
+        else {
+            movies = savedInstanceState.getParcelableArrayList("movies");
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView");
-        movies = new ArrayList<Movie>();
-        mImageAdapter = new PosterGridAdapter(
-                getActivity(),
-                movies,
-                this);
+//        if (savedInstanceState == null || !savedInstanceState.containsKey("movies")) {
+//            movies = new ArrayList<Movie>();
+//        }
+//        else {
+//            movies = savedInstanceState.getParcelableArrayList("movies");
+//        }
+        mImageAdapter = new PosterGridAdapter(getActivity(), movies);
 
         final View rootView = inflater.inflate(R.layout.fragment_poster_grid, container, false);
 
         mPosterView = (GridView) rootView.findViewById(R.id.posterGrid);
         mPosterView.setAdapter(mImageAdapter);
-
-        runFetchMoviePosterTask();
-
+        if (movies.size() == 0) {
+            Log.d(TAG, "running fetch movie poster task");
+            runFetchMoviePosterTask();
+        }
+        mPosterView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Movie movie = mImageAdapter.getItem(position);
+                onDetailPressed(movie);
+            }
+        });
         return rootView;
     }
 
@@ -88,8 +101,15 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
     @Override
     public void onPause() {
         Log.d(TAG, "onPause");
-        mGridState = mPosterView.onSaveInstanceState();
+//        mGridState = mPosterView.onSaveInstanceState();
+//        Log.d(TAG, "saved state on pausing " + mGridState);
         super.onPause();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("movies", movies);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -115,11 +135,11 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume");
-        if (mGridState != null) {
-            mPosterView.requestFocus();
-            mPosterView.onRestoreInstanceState(mGridState);
-            Log.d(TAG, mGridState.toString());
-        }
+//        if (mGridState != null) {
+//            mPosterView.requestFocus();
+//            mPosterView.onRestoreInstanceState(mGridState);
+//            Log.d(TAG, mGridState.toString());
+//        }
     }
 
 //    @Override
@@ -154,11 +174,6 @@ public class PosterGridFragment extends Fragment implements MovieDetailCallback,
         }
         FetchMoviePosterTask task = FetchMoviePosterTask.setUpFetchMoviePosterTask(this, sortBy);
         task.execute();
-    }
-
-    @Override
-    public void posterClicked(Movie movie) {
-        onDetailPressed(movie);
     }
 
     public void onMovieDataReceived(ArrayList<Movie> result) {
